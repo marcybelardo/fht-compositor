@@ -36,6 +36,10 @@ pub enum KeyActionType {
     ResizeFloatingWindow([i32; 2]),
     FocusNextWindow,
     FocusPreviousWindow,
+    FocusWindowUp,
+    FocusWindowDown,
+    FocusWindowLeft,
+    FocusWindowRight,
     SwapWithNextWindow,
     SwapWithPreviousWindow,
     FocusNextOutput,
@@ -112,6 +116,18 @@ impl From<fht_compositor_config::KeyActionDesc> for KeyAction {
                     fht_compositor_config::SimpleKeyAction::FocusPreviousWindow => {
                         KeyActionType::FocusPreviousWindow
                     }
+                    fht_compositor_config::SimpleKeyAction::FocusWindowDown => {
+                        KeyActionType::FocusWindowDown
+                    }
+                    fht_compositor_config::SimpleKeyAction::FocusWindowUp => {
+                        KeyActionType::FocusWindowUp
+                    }
+                    fht_compositor_config::SimpleKeyAction::FocusWindowLeft => {
+                        KeyActionType::FocusWindowLeft
+                    }
+                    fht_compositor_config::SimpleKeyAction::FocusWindowRight => {
+                        KeyActionType::FocusWindowRight
+                    }
                     fht_compositor_config::SimpleKeyAction::SwapWithNextWindow => {
                         KeyActionType::SwapWithNextWindow
                     }
@@ -177,6 +193,18 @@ impl From<fht_compositor_config::KeyActionDesc> for KeyAction {
                     }
                     fht_compositor_config::ComplexKeyAction::FocusPreviousWindow => {
                         KeyActionType::FocusPreviousWindow
+                    }
+                    fht_compositor_config::ComplexKeyAction::FocusWindowDown => {
+                        KeyActionType::FocusWindowDown
+                    }
+                    fht_compositor_config::ComplexKeyAction::FocusWindowUp => {
+                        KeyActionType::FocusWindowUp
+                    }
+                    fht_compositor_config::ComplexKeyAction::FocusWindowLeft => {
+                        KeyActionType::FocusWindowLeft
+                    }
+                    fht_compositor_config::ComplexKeyAction::FocusWindowRight => {
+                        KeyActionType::FocusWindowRight
                     }
                     fht_compositor_config::ComplexKeyAction::SwapWithNextWindow => {
                         KeyActionType::SwapWithNextWindow
@@ -343,6 +371,10 @@ impl State {
                     self.set_keyboard_focus(Some(window));
                 }
             }
+            KeyActionType::FocusWindowDown => unimplemented!(),
+            KeyActionType::FocusWindowUp => unimplemented!(),
+            KeyActionType::FocusWindowLeft => unimplemented!(),
+            KeyActionType::FocusWindowRight => unimplemented!(),
             KeyActionType::SwapWithNextWindow => {
                 let active = self.fht.space.active_workspace_mut();
                 if active.swap_active_tile_with_next(true, true) {
